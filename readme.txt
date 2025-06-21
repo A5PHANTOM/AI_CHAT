@@ -33,6 +33,5 @@ The app answers questions using the provided PDF context when relevant and provi
 
 ### 1️⃣ Clone this repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clonehttps://github.com/A5PHANTOM/AI_CHAT.git
 
