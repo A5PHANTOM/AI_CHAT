@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Premium Chat App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
+
+<div class="bg-gray-800 rounded-2xl shadow-lg p-6 w-full max-w-2xl">
+    <h1 class="text-3xl font-bold text-center mb-4">AI MESSAGE BOX</h1>
+
+    <div class ="mb-4">
+        <textarea id="messageInput" rows="2"placeholder="type your message..." class="w-full rounded-xl p-3 bg-gray-700 text-white"></textarea>
+        <button onclick="sendMesssage()" class="bg-blue-500 nt-2 px-2 py-2 rounded-xl w-full"> SEND MESSAGE</button>
+    </div>
+
+    <div class="mb-4">
+        <textarea id="questionInput" row="2" placeholder="Ask AI question" class="w-full rounded-xl p-3 bg-gray-700 text-white"></textarea>
+        <button onclick="askAI()" class="bg-green-500 hover:bg=green-600 mt-2 px-4 py-2 rounded-xl w-full">ASK AI</button>
+    </div>
+
+    <div id="chatLog" class="space-y-2 text-sm overflow-y-auto max-h-64 border-t border-gray-600 pt-2">
+
+    </div>
+
+</div>
+
+<script>
+    async function sendMesssage(){
+        const msg = document.getElementById('messageInput').value.trim();
+        if(!msg) return alert('enter a message!!');
+
+        const res=await fetch('/send_message',{
+            method:'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({username:'User',message:msg})
+        });
+        if (res.ok){
+            loadMessages();
+            document.getElementById('messageInput').value='';
+        }
+        else{
+            alert('Error sending Mesage');
+
+        }
+    }
+        
+    async function askAI(){
+        const query =document.getElementById('questionInput').value.trim();
+        if (!query) return alert('enter a question!');
+
+        const res = await fetch('/ask',{
+            method:'POST',
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({query: query})
+        });
+    
+
+    const data= await res.json();
+    const chatLog = document.getElementById('chatLog');
+    chatLog.innerHTML +=`<div><strong>AI:</strong>${data.answer}</div>`;
+    document.getElementById('questionInput').value='';
+    }
+
+    async function loadMessages() {
+        const res =await fetch('/get_messages');
+        const message = await res.json();
+        const chatLog =document.getElementById('chatLog');
+        chatLog.innerHTML =message.map (m=>`<div><strong>${m.username}:</strong> ${m.message}</div>`).join('');
+
+    }
+//loaading existig messages on loading
+loadMessages();
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+flask
+pymongo
+redis
+google-generativeai
+langchain
+langchain-community
+PyPDF2
