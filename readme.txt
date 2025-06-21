@@ -1,5 +1,10 @@
 # 💬 AI Chat Application (Intern Task)
 
+
+✅ Check out the live app:  
+[https://ai-chat-1-v55j.onrender.com/chat](https://ai-chat-1-v55j.onrender.com/chat)
+
+
 This is a Flask-based chat application that integrates:
 - 🧠 **Hybrid RAG (Retrieval-Augmented Generation)** using a PDF document + Google Gemini AI
 - 💾 **MongoDB Atlas** for message storage
@@ -34,4 +39,7 @@ The app answers questions using the provided PDF context when relevant and provi
 ### 1️⃣ Clone this repository
 ```bash
 git clonehttps://github.com/A5PHANTOM/AI_CHAT.git
+
+✅ Check out the live app:  
+[https://ai-chat-1-v55j.onrender.com/chat](https://ai-chat-1-v55j.onrender.com/chat)
 
